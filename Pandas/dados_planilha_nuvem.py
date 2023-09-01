@@ -7,21 +7,20 @@ def main():
     try:
         # URL do arquivo na nuvem
         url = "https://drive.google.com/uc?id=1ynn2dtqFwQJt3ruH761WAt1ftEgoQ5YP"
-        # CABECALHO: Cliente;Porduto;Valor unit R$;Quantidade
+        # CABECALHO: Cliente ---  Porduto --- Valor unit R$  ---  Quantidade
         # Obter o conteúdo do arquivo da URL
         response = requests.get(url)
         content = response.content.decode('utf-8')
 
         # Criar um objeto io.StringIO para simular um arquivo
-        file_like = io.StringIO(content)
+        arquivo = io.StringIO(content)
 
         # Lê o arquivo usando o pandas
-        arquivo_nuvem = pd.read_csv(file_like, delimiter=';')
+        arquivo_nuvem = pd.read_csv(arquivo, delimiter=';')
 
         # Converte a coluna "Quantidade" para valores numéricos
         arquivo_nuvem["Quantidade"] = pd.to_numeric(
             arquivo_nuvem["Quantidade"])
-
         arquivo_nuvem["TOTAL"] = arquivo_nuvem["Valor unit R$"] * \
             arquivo_nuvem["Quantidade"]
 
@@ -29,43 +28,43 @@ def main():
             by="Quantidade", ascending=False)
 
         print(
-            "\n******************************************************************************")
+            "\n******************************************************************")
         print(
-            "*****         Cliente --- Produto --- Quantidade                         *****")
+            "*****      CLIENTE               PRODUTO       QUANTIDADE    *****")
         print(
-            "******************************************************************************")
+            "******************************************************************")
 
         for i, row in cliente_desc.iterrows():
             print(
-                f"\t{row['Cliente']} ---- {row['Porduto']} ---- {row['Quantidade']}")
+                f"\t{row['Cliente']:<25} {row['Porduto']:<15} {row['Quantidade']:<12}")
         print(
-            "----------------------------------------------------------------------------\n")
+            "-----------------------------------------------------------------")
 
         print(
-            "\n******************************************************************************")
+            "\n****************************************************************************************")
         print(
-            "*****         Cliente --- Produto --- Valor unit --- Quantidade          *****")
+            "*****      CLIENTE               PRODUTO      VALOR UNIT. R$      QUANTIDADE       *****")
         print(
-            "******************************************************************************")
-
-        for i, row in cliente_desc.iterrows():
-            print(
-                f"\t{row['Cliente']} ---- {row['Porduto']} ---- {row['Valor unit R$']} ---- {row['Quantidade']}")
-        print(
-            "----------------------------------------------------------------------------\n")
-
-        print(
-            "\n**********************************************************************************")
-        print(
-            "*****         Cliente --- Produto --- Valor unit --- Quantidade --- TOTAL    *****")
-        print(
-            "**********************************************************************************")
+            "****************************************************************************************")
 
         for i, row in cliente_desc.iterrows():
             print(
-                f"\t{row['Cliente']} ---- {row['Porduto']} ---- {row['Valor unit R$']} ---- {row['Quantidade']} ---- {row['TOTAL']:.2f}")
+                f"\t{row['Cliente']:<25} {row['Porduto']:<15} {row['Valor unit R$']:<17}  {row['Quantidade']:<12}")
         print(
-            "-------------------------------------------------------------------------------------\n")
+            "-----------------------------------------------------------------------------------------")
+
+        print(
+            "\n************************************************************************************************")
+        print(
+            "*****      CLIENTE               PRODUTO      VALOR UNIT. R$      QUANTIDADE      TOTAL    *****")
+        print(
+            "************************************************************************************************")
+
+        for i, row in cliente_desc.iterrows():
+            print(
+                f"\t{row['Cliente']:<25} {row['Porduto']:<15} {row['Valor unit R$']:<17}  {row['Quantidade']:<12} {row['TOTAL']:.2f}")
+            print(
+                "---------------------------------------------------------------------------------------------")
 
     except Exception as e:
         print("Erro ao carregar dados:", e)

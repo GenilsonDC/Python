@@ -3,81 +3,69 @@ import requests
 import io
 
 
-def load_data_from_url(url):
+def main():
     try:
+        # URL do arquivo na nuvem
+        url = "https://drive.google.com/uc?id=17A0MYJRUGHsLjuJZJMzU045jhIh5I3lE"
+        # Campos do cabeçalho: Client - Position - Currency - Amount - Total Price BRL
+
+        # Obter o conteúdo do arquivo da URL
         response = requests.get(url)
         content = response.content.decode('utf-8')
-        # Substituir vírgulas por pontos para números decimais
-        content = content.replace(',', '.')
-        return pd.read_csv(io.StringIO(content), delimiter=';')
-    except Exception as e:
-        print("Erro ao carregar dados:", e)
-        return None
 
+        # Criar um objeto io.StringIO para simular um arquivo
+        arquivo = io.StringIO(content)
 
-def clean_whitespace(df):
-    # Remover espaços em branco das colunas de texto (Client e Position)
-    df['Client'] = df['Client'].str.strip()
-    df['Position'] = df['Position'].str.strip()
+        # Lê o arquivo usando o pandas
+        arquivo_nuvem = pd.read_csv(arquivo, delimiter=';')
+        pd.set_option('display.max_colwidth', None)
+        pd.set_option('display.expand_frame_repr', False)
 
-    # Remover espaços em branco das colunas numéricas (Amount e Total Price BRL)
-    df['Amount'] = df['Amount'].str.replace(' ', '').astype(float)
-    df['Total Price BRL'] = df['Total Price BRL'].str.replace(
-        ' ', '').str.replace(',', '.').astype(float)
+        # Converte a coluna "Quantidade" para valores numéricos
+        arquivo_nuvem["Amount"] = pd.to_numeric(arquivo_nuvem["Amount"])
 
-    return df
+        arquivo_nuvem["Total Price BRL"] = arquivo_nuvem["Total Price BRL"].str.replace(
+            ',', '.', regex=True).astype(float)
 
-
-def main():
-    url = "https://drive.google.com/file/d/1XxeVOdtN6qmxQifSZDgSs5ftPBb8k1H-/view?usp=sharing"
-
-    arquivo_dados = load_data_from_url(url)
-
-    if arquivo_dados is not None:
-        # Extraindo e calculando o volume negociado por cliente
-        arquivo_dados_cleaned = clean_whitespace(arquivo_dados)
-        vol_negociado = arquivo_dados.groupby("Client")["Amount"].sum()
-        print("\n******************************************************************************")
+        Amount = arquivo_nuvem.groupby("Client")["Amount"].sum().reset_index()
+        print()
+        print(
+            "******************************************************************************")
         print(
             "*****                    Volume negociado por Cliente                    *****")
         print(
             "******************************************************************************")
-        print(vol_negociado)
-        print("-------------------------------------\n")
+        for i, row in Amount.iterrows():
+            print(f"\t{row['Client']:<25} {row['Amount']:<15}")
+        print("------------------------------------------------------------------------------ \n")
 
-        # print(
-        #     "******************************************************************************")
-        # print(
-        #     "*****        Volume negociado por Position(SELL - BUY) do cliente        *****")
-        # print(
-        #     "******************************************************************************")
-        # positions = arquivo_dados.groupby(
-        #     ["Client", "Position"])["Amount"].sum()
-        # print(positions)
-        # print("-------------------------------------\n")
+        print(
+            "******************************************************************************")
+        print(
+            "*****        Volume negociado por Position(SELL - BUY) por cliente        *****")
+        print(
+            "******************************************************************************")
 
-        # print(
-        #     "******************************************************************************")
-        # print(
-        #     "*****                      Media de Total Price BRL                      *****")
-        # print(
-        #     "******************************************************************************")
-        # arquivo_dados["Total Price BRL"] = arquivo_dados["Total Price BRL"].str.replace(
-        #     ",", ".").astype(float)
-        # media = arquivo_dados.groupby("Position")["Total Price BRL"].mean()
-        # print(media)
-        # print("-------------------------------------\n")
+        positions = arquivo_nuvem.groupby(
+            ["Client", "Position"])["Amount"].sum()
+        for (client, position), amount in positions.items():
+            print(f"\t{client:<25} {position:<15} {amount:<10}")
+        print("------------------------------------------------------------------------------ \n")
 
-        # print(
-        #     "******************************************************************************")
-        # print(
-        #     "*****                Media de Total Price BRL por cliente                *****")
-        # print(
-        #     "******************************************************************************")
-        # media_cliente = arquivo_dados.groupby(["Client", "Position"])[
-        #     "Total Price BRL"].mean()
-        # print(media_cliente)
-        # print("-------------------------------------\n")
+        print(
+            "******************************************************************************")
+        print(
+            "*****                      Media de Total Price BRL                      *****")
+        print(
+            "******************************************************************************")
+
+        media = arquivo_nuvem.groupby("Position")["Total Price BRL"].mean()
+        for position, avg in media.items():
+            print(f"\t{position:<25} {avg:<15.2f}")
+        print("------------------------------------------------------------------------------  \n")
+
+    except Exception as e:
+        print("Erro ao carregar dados:", e)
 
 
 if __name__ == "__main__":
