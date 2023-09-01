@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import io
 
+
 def main():
     try:
         # URL do arquivo na nuvem
@@ -18,21 +19,57 @@ def main():
         arquivo_nuvem = pd.read_csv(file_like, delimiter=';')
 
         # Converte a coluna "Quantidade" para valores numéricos
-        arquivo_nuvem["Quantidade"] = pd.to_numeric(arquivo_nuvem["Quantidade"])
+        arquivo_nuvem["Quantidade"] = pd.to_numeric(
+            arquivo_nuvem["Quantidade"])
 
-        cliente_desc = arquivo_nuvem.sort_values(by="Quantidade", ascending=False)
+        arquivo_nuvem["TOTAL"] = arquivo_nuvem["Valor unit R$"] * \
+            arquivo_nuvem["Quantidade"]
 
-        print("******************************************************************************")
-        print("*****                    Volume negociado por Cliente                    *****")
-        print("******************************************************************************")
+        cliente_desc = arquivo_nuvem.sort_values(
+            by="Quantidade", ascending=False)
+
+        print(
+            "\n******************************************************************************")
+        print(
+            "*****         Cliente --- Produto --- Quantidade                         *****")
+        print(
+            "******************************************************************************")
 
         for i, row in cliente_desc.iterrows():
-            print(f"{row['Cliente']} ---- {row['Porduto']} ---- {row['Quantidade']}")
-        print("-------------------------------------")
-        print()
+            print(
+                f"\t{row['Cliente']} ---- {row['Porduto']} ---- {row['Quantidade']}")
+        print(
+            "----------------------------------------------------------------------------\n")
+
+        print(
+            "\n******************************************************************************")
+        print(
+            "*****         Cliente --- Produto --- Valor unit --- Quantidade          *****")
+        print(
+            "******************************************************************************")
+
+        for i, row in cliente_desc.iterrows():
+            print(
+                f"\t{row['Cliente']} ---- {row['Porduto']} ---- {row['Valor unit R$']} ---- {row['Quantidade']}")
+        print(
+            "----------------------------------------------------------------------------\n")
+
+        print(
+            "\n**********************************************************************************")
+        print(
+            "*****         Cliente --- Produto --- Valor unit --- Quantidade --- TOTAL    *****")
+        print(
+            "**********************************************************************************")
+
+        for i, row in cliente_desc.iterrows():
+            print(
+                f"\t{row['Cliente']} ---- {row['Porduto']} ---- {row['Valor unit R$']} ---- {row['Quantidade']} ---- {row['TOTAL']:.2f}")
+        print(
+            "-------------------------------------------------------------------------------------\n")
 
     except Exception as e:
         print("Erro ao carregar dados:", e)
+
 
 if __name__ == "__main__":
     main()
