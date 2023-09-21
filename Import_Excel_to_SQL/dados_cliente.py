@@ -1,28 +1,20 @@
-import pandas as pd
-from sqlalchemy import create_engine
+from database import import_csv_to_postgres
 
 # Parâmetros de conexão com o banco de dados
 db_params = {
-    'dbname': 'praticas',
+    'dbname': 'ETL',
     'user': 'postgres',
-    'password': '645711',
+    'password': '572711',
     'host': 'localhost',
     'port': '5432'
 }
 
 # Caminho do arquivo CSV
-csv_file = 'Dados\Book1.csv'
+csv_file = './Dados/Clientes.csv'
 
 # Nome da tabela no banco de dados
-table_name = 'clientes_teste2'
+table_name = 'Clientes'
 
-# Lendo o arquivo CSV como um DataFrame do Pandas
-df = pd.read_csv(csv_file, delimiter=';')
+import_csv_to_postgres(csv_file, table_name, db_params)
 
-# Criando uma conexão com o banco de dados
-engine = create_engine(f'postgresql://{db_params["user"]}:{db_params["password"]}@{db_params["host"]}:{db_params["port"]}/{db_params["dbname"]}')
-
-# Salvando o DataFrame no banco de dados PostgreSQL com if_exists='append'
-df.to_sql(table_name, engine, if_exists='append', index=False)
-
-print('SUCESSO! - Dados importados')
+print('\n \tSUCESSO! - Dados dos Clientes importados')
