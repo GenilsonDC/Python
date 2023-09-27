@@ -1,1 +1,25 @@
-﻿SKU;Produto;Marca;Tipo do Produto;Preco Unitario;Custo UnitarioHL1001;Smart TV 50' 4K - Preto;LG;Televisão;2600.00;1700.00HL1002;iPhone 7 - Dourado;Apple;Celular;2500.00;1500.00HL1003;Galaxy S10 - Cinza;Samsung;Celular;4500.00;2800.00HL1004;Apple Watch - Preto;Apple;Smart Watch;1750.00;900.00HL1005;Câmera Digital Rebel T6 - Preto;Canon;Câmera;1500.00;850.00HL1006;TV LED 32' - Preto;Samsung;Televisão;1400.00;900.00HL1007;Inspiron 15 - Prata;Dell;Notebook;2300.00;1200.00HL1008;Smart TV LED Full HD 55' - Preto;Philco;Televisão;2000.00;1250.00HL1009;Moto G7 - Vermelho;Motorola;Celular;1400.00;750.00HL1010;iPhone 6S - Rosa;Apple;Celular;1900.00;1150.00HL1011;Tablet M10 Android - Preto;Samsung;Tablet;2000.00;1100.00HL1012;Dell G7 - Vermelho;Dell;Notebook;5500.00;3200.00HL1013;Câmera Coolpix L340 - Cinza;Nikon;Câmera;1550.00;700.00HL1014;Galaxy J8 - Roxo;Samsung;Celular;1100.00;550.00HL1015;Câmera Digital Sony Cyber - Azul;Sony;Câmera;700.00;300.00HL1016;Smart Watch Galaxy - Azul;Samsung;Smart Watch;1450.00;700.00HL1017;Smart TV 75' 4K - Preto;Samsung;Televisão;5200.00;3500.00HL1018;Smart Watch MI - Amarelo;Xiaomi;Smart Watch;1200.00;650.00HL1019;iPhone XS - Preto;Apple;Celular;6500.00;2800.00HL1020;Moto Z - Vermelho;Motorola;Celular;1500.00;650.00HL1021;Galaxy S8 - Verde;Samsung;Celular;3000.00;1400.00HL1022;iPad 32GB Wifi - Prata;Apple;Tablet;750.00;350.00HL1023;Samsung Dual Core - Preto;Samsung;Notebook;1500.00;550.00HL1024;Aspire 5 - Cinza;Acer;Notebook;2400.00;1150.00
+﻿SKU;Produto;Marca;Tipo_do_Produto;Preco_Unitario;Custo_Unitario
+HL1001;Smart TV 50' 4K - Preto;LG;Televisão;2600.00;1700.00
+HL1002;iPhone 7 - Dourado;Apple;Celular;2500.00;1500.00
+HL1003;Galaxy S10 - Cinza;Samsung;Celular;4500.00;2800.00
+HL1004;Apple Watch - Preto;Apple;Smart Watch;1750.00;900.00
+HL1005;Câmera Digital Rebel T6 - Preto;Canon;Câmera;1500.00;850.00
+HL1006;TV LED 32' - Preto;Samsung;Televisão;1400.00;900.00
+HL1007;Inspiron 15 - Prata;Dell;Notebook;2300.00;1200.00
+HL1008;Smart TV LED Full HD 55' - Preto;Philco;Televisão;2000.00;1250.00
+HL1009;Moto G7 - Vermelho;Motorola;Celular;1400.00;750.00
+HL1010;iPhone 6S - Rosa;Apple;Celular;1900.00;1150.00
+HL1011;Tablet M10 Android - Preto;Samsung;Tablet;2000.00;1100.00
+HL1012;Dell G7 - Vermelho;Dell;Notebook;5500.00;3200.00
+HL1013;Câmera Coolpix L340 - Cinza;Nikon;Câmera;1550.00;700.00
+HL1014;Galaxy J8 - Roxo;Samsung;Celular;1100.00;550.00
+HL1015;Câmera Digital Sony Cyber - Azul;Sony;Câmera;700.00;300.00
+HL1016;Smart Watch Galaxy - Azul;Samsung;Smart Watch;1450.00;700.00
+HL1017;Smart TV 75' 4K - Preto;Samsung;Televisão;5200.00;3500.00
+HL1018;Smart Watch MI - Amarelo;Xiaomi;Smart Watch;1200.00;650.00
+HL1019;iPhone XS - Preto;Apple;Celular;6500.00;2800.00
+HL1020;Moto Z - Vermelho;Motorola;Celular;1500.00;650.00
+HL1021;Galaxy S8 - Verde;Samsung;Celular;3000.00;1400.00
+HL1022;iPad 32GB Wifi - Prata;Apple;Tablet;750.00;350.00
+HL1023;Samsung Dual Core - Preto;Samsung;Notebook;1500.00;550.00
+HL1024;Aspire 5 - Cinza;Acer;Notebook;2400.00;1150.00

@@ -1,4 +1,3 @@
-
 import psycopg2
 from psycopg2 import sql
 from psycopg2.extras import execute_values
@@ -23,13 +22,13 @@ except psycopg2.Error as e:
 
 cur = conct.cursor()
 # --------------------------------
-csv_file = 'Dados/Vendas.csv'
+csv_file = 'Dados/Lojas.csv'
 # --------------------------------
-table_name = 'vendas'
+table_name = 'lojas'
 # --------------------------------
 
 insert_query = sql.SQL("""
-INSERT INTO {}(SKU, Qtd_Vendida, Loja, Data_da_Venda, Codigo_Cliente) VALUES %s;                       
+INSERT INTO {}(Codigo_Loja, Nome, Endereco) VALUES %s;                       
 """).format(sql.Identifier(table_name))
 
 try:
