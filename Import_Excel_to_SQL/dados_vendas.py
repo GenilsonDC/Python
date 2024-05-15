@@ -7,7 +7,7 @@ db_name = 'ETL'
 db_host = 'localhost'
 db_port = '5432'
 db_user = 'postgres'
-db_passw = '572711'
+db_passw = '00000'
 
 try:
     conct = psycopg2.connect(
