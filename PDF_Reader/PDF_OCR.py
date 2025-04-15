@@ -71,7 +71,7 @@ with open(output_found, "w", encoding="utf-8") as found_file, open(
                     for tag in tags_procuradas:
                         if tag in text:
                             tags_found.append(
-                                f"TAG:{tag} encontrada no arquivo: {filename} (Página {page_number + 1})"
+                                f"TAG {tag} : encontrada no arquivo: {filename} (Página {page_number + 1})"
                             )
                             break  # Parar de procurar tags nesta página
 
